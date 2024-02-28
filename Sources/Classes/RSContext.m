@@ -168,6 +168,12 @@ static dispatch_queue_t queue;
     });
 }
 
+- (void)putUserAgent:(NSString *)userAgent {
+    dispatch_sync(queue, ^{
+        self->_userAgent = userAgent;
+    });
+}
+
 - (void)putAdvertisementId:(NSString *_Nonnull)idfa {
     // This isn't ideal.  We're doing this because we can't actually check if IDFA is enabled on
     // the customer device.  Apple docs and tests show that if it is disabled, one gets back all 0's.
